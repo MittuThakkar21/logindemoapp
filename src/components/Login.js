@@ -1,16 +1,17 @@
 import React, { useState } from 'react'
 import { Button, Form } from 'react-bootstrap';
+import { useHistory } from 'react-router';
 import '../login.css'
 
 
 const Login = () => {
-    const paperstyle = { padding: 20, height: '70vh', width: 200, margin: '20px auto' }
     const [userLogin, setUserLogin] = useState({
         email: '',
         password: ''
     });
 
     const [records, setRecords] = useState([]);
+    const history = useHistory();
 
     const handleInput = (e) => {
         const name = e.target.name;
@@ -27,7 +28,29 @@ const Login = () => {
         const newRecords = { ...userLogin, id: new Date().getTime().toString() }
         setRecords([...records, newRecords])
         console.log(newRecords);
+
+        const email = newRecords.email
+        const password = newRecords.password
+        console.log('email', email, 'password', password);
+
+
         setUserLogin({ email: '', password: '' })
+
+        const getemail = localStorage.getItem('email')
+        const getpassword = localStorage.getItem('password')
+
+        console.log('email', getemail);
+        console.log('password', getpassword);
+
+        if (email === getemail && password === getpassword) {
+            console.log('logged in..!');
+            history.push('/dashboard')
+
+        } else {
+            alert('invalid email or password');
+        }
+
+
     }
 
     return (
@@ -118,11 +141,11 @@ const Login = () => {
                 </Button>
                     <div>
                         {
-                            records.map((ele) => {
+                            records.map((ele, index) => {
                                 console.log(ele)
                                 return (
                                     <>
-                                        <h2>{ele.email}</h2>
+                                        <h2 key={index}>{ele.email}</h2>
                                     </>
                                 )
                             })

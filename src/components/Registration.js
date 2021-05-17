@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Avatar, Button, Grid, Paper, TextField } from '@material-ui/core'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { Form } from 'react-bootstrap';
+import { useHistory } from 'react-router';
 
 
 const Registration = () => {
@@ -13,6 +14,7 @@ const Registration = () => {
     });
 
     const [records, setRecords] = useState([]);
+    const history = useHistory();
 
     const handleInput = (e) => {
         const name = e.target.name;
@@ -30,6 +32,16 @@ const Registration = () => {
         setRecords([...records, newRecords])
         console.log(newRecords);
         setUserRegister({ username: '', email: '', password: '' })
+
+        localStorage.setItem('username', userRegister.username)
+        localStorage.setItem('email', userRegister.email)
+        localStorage.setItem('password', userRegister.password)
+
+        alert('registered with', newRecords)
+        console.log('registration done with ', newRecords)
+
+        history.push('/login')
+
     }
 
     return (
@@ -75,16 +87,16 @@ const Registration = () => {
                         />
                     </Form.Group>
 
-                    <Button variant="primary" type="submit">
+                    <Button type="submit">
                         Submit
                 </Button>
                     <div>
                         {
-                            records.map((ele) => {
+                            records.map((ele, index) => {
                                 console.log(ele)
                                 return (
                                     <>
-                                        <h2>{ele.username}</h2>
+                                        <h2 key={index}>{ele.username}</h2>
                                         <h2>{ele.email}</h2>
                                     </>
                                 )
