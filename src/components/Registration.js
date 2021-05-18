@@ -3,6 +3,7 @@ import { Avatar, Button, Grid, Paper, TextField } from '@material-ui/core'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { Form } from 'react-bootstrap';
 import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 
 
 const Registration = () => {
@@ -37,8 +38,8 @@ const Registration = () => {
         localStorage.setItem('email', userRegister.email)
         localStorage.setItem('password', userRegister.password)
 
-        alert('registered with', newRecords)
-        console.log('registration done with ', newRecords)
+        alert('registration successfully done..!', newRecords)
+        console.log('registration successfully done..!', newRecords)
 
         history.push('/login')
 
@@ -47,11 +48,7 @@ const Registration = () => {
     return (
         <div>
             <div>
-                <Form onSubmit={handleSubmit} style={{
-                    width: "50",
-                    height: '10vh',
-                    display: "-ms-flexbox"
-                }} >
+                <Form onSubmit={handleSubmit} >
 
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Username</Form.Label>
@@ -89,7 +86,10 @@ const Registration = () => {
 
                     <Button type="submit">
                         Submit
-                </Button>
+                </Button><br />
+                    <span>Already have an account? Login</span><br />
+                    <Link to='/login'><Button>Login</Button></Link>
+
                     <div>
                         {
                             records.map((ele, index) => {

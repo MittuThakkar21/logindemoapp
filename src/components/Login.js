@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
-import { Button, Form } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
+import { Avatar, Button, Grid, Paper, TextField } from '@material-ui/core'
+
 import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 import '../login.css'
 
 
@@ -9,6 +12,7 @@ const Login = () => {
         email: '',
         password: ''
     });
+    const [loggedIn, setLoggedIn] = useState(false);
 
     const [records, setRecords] = useState([]);
     const history = useHistory();
@@ -44,6 +48,9 @@ const Login = () => {
 
         if (email === getemail && password === getpassword) {
             console.log('logged in..!');
+            localStorage.setItem('token', "dasdasdas");
+            // console.log(localStorage.getItem('token'))
+            setLoggedIn(true)
             history.push('/dashboard')
 
         } else {
@@ -54,65 +61,9 @@ const Login = () => {
     }
 
     return (
-        // <div className="container-fluid">
-        //     <div className="row">
-        //         <div className="d-flex justify-content-center align-items-center container">
-        //             <div className=" form-group">
-        //                 {/* <!--Email--> */}
-        //                 <label id="email">Email Address</label>
-        //                 <div className="input-group">
-        //                     <div className="input-group-prepend">
-        //                         <div className="input-group-text">
-        //                             <span className="fas fa-user"></span>
-        //                         </div>
-
-        //                     </div>
-        //                     <input type="email" placeholder="Enter Email" className="form-control" id="email1" name="email" />
-        //                 </div><br></br>
-
-        //                 {/* <!--password--> */}
-        //                 <label id="align">Password</label>
-        //                 <div className="input-group">
-        //                     <div className="input-group-prepend">
-        //                         <div className="input-group-text">
-        //                             <i className="fas fa-key"></i>
-        //                         </div>
-        //                     </div>
-
-        //                     <input type="password" placeholder="Enter Password" className="form-control" name="password" />
-
-
-        //                 </div>
-        //                 <br />
-        //                 <div className="custom-control custom-checkbox">
-        //                     <input type="checkbox" className="custom-control-input" id="chk1" />
-        //                     <label className="custom-control-label" for="chk1">Remember Me</label>
-        //                 </div>
-
-        //                 <button type="button" className="btn btn-primary btn-block btn-md" id="login" id="button" >Login</button>
-
-        //                 <br />
-        //                 <button type="button" className="btn btn-danger" >Cancel</button>
-        //                 <span className="psw" id="forget">
-        //                     "Forget" <a href="#">Password? </a>
-        //                 </span>
-
-        //             </div>
-
-        //         </div>  <br />
-        //     </div>
-        // </div>
-
-
         <div>
             <div>
-                <Form onSubmit={handleSubmit} style={{
-                    width: "50",
-                    height: '10vh',
-                    display: "-ms-flexbox"
-                }} >
-
-
+                <Form onSubmit={handleSubmit}>
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>
                         <Form.Control type="email"
@@ -136,9 +87,11 @@ const Login = () => {
                         />
                     </Form.Group>
 
-                    <Button variant="primary" type="submit">
+                    <Button type="submit">
                         Submit
-                </Button>
+                </Button><br />
+                    <span>You don't have an account? Please Register..!</span><br />
+                    <Link to='/registration'><Button>Registration</Button></Link>
                     <div>
                         {
                             records.map((ele, index) => {

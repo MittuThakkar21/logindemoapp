@@ -1,17 +1,22 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
 import Dashboard from './components/Dashboard';
 import Home from './components/Home';
 import Login from './components/Login';
 import Registration from './components/Registration';
+import PublicRoute from './PublicRoute'
 
 function App() {
-  // const [token, setToken] = useState();
+  const [loggedIn, setLoggedIn] = useState(false)
+
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
 
 
-  // if (!token) {
-  //   return <Login setToken={setToken} />
-  // }
+      setLoggedIn({ loggedIn: true })
+    }
+  }, [])
+
   return (
 
     <Router>
@@ -20,9 +25,9 @@ function App() {
         <Route exact path='/' component={Home} />
         <Route exact path='/login' component={Login} />
         <Route exact path='/registration' component={Registration} />
-        <Route exact path='/dashboard' component={Dashboard} />
+        <PublicRoute exact='/dashboard' component={Dashboard} />
 
-
+        <Redirect path='/login' />
       </Switch>
     </Router>
 
