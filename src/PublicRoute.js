@@ -1,10 +1,9 @@
 import React from 'react'
 import { Redirect, Route, useHistory } from 'react-router'
-import Dashboard from './components/Dashboard'
 
 const PublicRoute = (props) => {
     const token = localStorage.getItem('token')
-    console.log('token in public ', token);
+    // console.log('token in public ', token);
     const { component: WrappedComponent, render, ...rest } = props;
     var loggedIn = true
 

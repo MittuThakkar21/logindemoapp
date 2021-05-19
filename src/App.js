@@ -8,14 +8,13 @@ import PublicRoute from './PublicRoute'
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false)
-
+  const token = localStorage.getItem('token')
   useEffect(() => {
-    if (localStorage.getItem('token')) {
 
-
+    if (token) {
       setLoggedIn({ loggedIn: true })
     }
-  }, [])
+  }, [token])
 
   return (
 
@@ -27,7 +26,9 @@ function App() {
         <Route exact path='/registration' component={Registration} />
         <PublicRoute exact='/dashboard' component={Dashboard} />
 
-        <Redirect path='/login' />
+
+        <Redirect to='/login' />
+
       </Switch>
     </Router>
 
