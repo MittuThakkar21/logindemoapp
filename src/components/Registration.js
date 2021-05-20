@@ -4,6 +4,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { Form } from 'react-bootstrap';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
+import toast, { Toaster } from 'react-hot-toast';
 
 
 const Registration = () => {
@@ -42,6 +43,12 @@ const Registration = () => {
         console.log('registration successfully done..!', newRecords)
 
         history.push('/login')
+
+    }
+
+    const notify = (e) => {
+        e.preventDefault();
+        toast('Here is your toast.');
 
     }
 
@@ -84,9 +91,10 @@ const Registration = () => {
                         />
                     </Form.Group>
 
-                    <Button type="submit">
+                    <Button type="submit" onClick={notify}>
                         Submit
                 </Button><br />
+                    <Toaster />
                     <span>Already have an account? Login</span><br />
                     <Link to='/login'><Button>Login</Button></Link>
 

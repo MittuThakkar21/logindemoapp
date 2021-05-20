@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
 import Dashboard from './components/Dashboard';
+import FormReactHook from './components/FormReactHook';
 import Home from './components/Home';
 import Login from './components/Login';
 import Registration from './components/Registration';
@@ -25,7 +26,7 @@ function App() {
   return (
     <>
 
-      <Router>
+      {/* <Router>
         <Switch>
 
           <Route exact path='/' component={Home} />
@@ -37,15 +38,16 @@ function App() {
           <Redirect to='/login' />
 
         </Switch>
-      </Router>
+      </Router> */}
 
       {/*create a Provider for passing value in consumer in context api */}
 
-      <FirstName.Provider value={'Mittu Thakkar'}>
+      {/* <FirstName.Provider value={'Mittu Thakkar'}>
         <LastName.Provider value={'m r t last'}>
           <CompA />
         </LastName.Provider>
-      </FirstName.Provider>
+      </FirstName.Provider> */}
+      <FormReactHook />
 
 
     </>

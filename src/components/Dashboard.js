@@ -38,7 +38,7 @@ const Dashboard = () => {
 
     return (
 
-        <div>
+        <>
 
             <h2>Hello..{localStorage.getItem('username')}</h2>
             <h2 style={style}>List of News</h2>
@@ -76,7 +76,7 @@ const Dashboard = () => {
 
             <button type="button" onClick={logout}>Logout</button>
 
-        </div >
+        </>
     )
 }
 
